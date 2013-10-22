@@ -14,7 +14,7 @@ if [ $? -eq 0 ]; then
 	link="$(curl -F "passwd=$password" -F "img=@$tmp" "$url")"
 
 	# copy to clipboard
-	echo "$link" | xsel -b
+	echo -n "$link" | xsel -b
 
 	# notify
 	notify-send ss "$link"
