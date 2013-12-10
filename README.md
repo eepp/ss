@@ -35,7 +35,7 @@ Here's an example:
 
 ```
 url="http://example.com/ss/up"
-passwd="peanut-butter"
+password="peanut-butter"
 ```
 
 The endpoint must accept a POST request with the following variables:
