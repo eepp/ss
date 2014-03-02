@@ -4,7 +4,7 @@ ss - easy screenshot sharing for X
 This simple script does the following when executed:
 
   1. executes `scrot` to draw a rectangle on the screen and save a PNG image
-  2. uploads this image to a custom server
+  2. uploads this image to a custom server or to imgur.com
   3. copies the image URL on the server to the clipboard
   4. notifies the user that everything is done
 
@@ -23,8 +23,8 @@ You need all the following:
   * `libnotify` package (for `notify-send`)
   * `xsel` package (for copying to clipboard)
 
-configuration
--------------
+configuration to use ss with custom server
+------------------------------------------
 
 `ss` sources `~/.ssrc`. This file must define two variables:
 
@@ -45,6 +45,11 @@ The endpoint must accept a POST request with the following variables:
 
 The response body must be the full URL of the stored image.
 
+Imgur.com
+---------
+
+You need to add the --imgur flag.
+
 using with...
 -------------
 
@@ -57,3 +62,12 @@ Add this to your `~/.fluxbox/keys`:
 ```
 
 Replace `180` by the keycode or key combination of your choice.
+
+### i3
+
+Add this to your ~/.i3/config
+```
+bindsym $mod+c exec sleep 0.2 && bash /path/to/ss
+```
+
+It seems that the sleep is necessary in other to use `scrot` with rectangle selection from i3 key binding. Any fix is welcome.
