@@ -20,13 +20,13 @@ if [ $? -eq 0 ]; then
 	if [ $# -gt 0 ] && [ $1 = "--imgur" ]; then
 		# upload screenshot to imgur
 		link="$(upload2imgur "$imgur_api_key" "$tmp")"
-		if [ ! $? -eq 0 ]; then
+		if [ $? -ne 0 ]; then
 			failed=1
 		fi
 	else
 		# upload screenshot to custom server
 		link="$(curl -F "passwd=$password" -F "img=@$tmp" "$url")"
-		if [ ! $? -eq 0 ]; then
+		if [ $? -ne 0 ]; then
 			failed=1
 		fi
 	fi
