@@ -70,4 +70,4 @@ Add this to your ~/.i3/config
 bindsym $mod+c exec sleep 0.2 && bash /path/to/ss
 ```
 
-It seems that the sleep is necessary in other to use `scrot` with rectangle selection from i3 key binding. Any fix is welcome.
+It seems that the sleep is necessary in order to use `scrot` with rectangle selection from i3 key binding. Any fix is welcome.
