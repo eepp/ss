@@ -1,4 +1,4 @@
-ss - easy screenshot sharing for X
+`ss` - easy screenshot sharing for X
 ==================================
 
 This simple script does the following when executed:
@@ -8,7 +8,9 @@ This simple script does the following when executed:
   3. copies the image URL on the server to the clipboard
   4. notifies the user that everything is done
 
-If a keyboard shortcut is used to call this script, I call this easy screenshot sharing for X.
+If a keyboard shortcut is used to call this script, I call this easy
+screenshot sharing for X.
+
 
 dependencies
 ------------
@@ -17,13 +19,15 @@ You need all the following:
 
   * [eepp's version of `scrot`](https://github.com/eepp/scrot)
      if you want to support the `-r` option, which
-     makes it possible to resize/move the drawn rectangle; otherwise, the upstream
-     version is fine, just remove the `-r` option in the script
+     makes it possible to resize/move the drawn rectangle; otherwise,
+     the upstream version is fine, just remove the `-r` option in the
+     script
   * `curl` package
   * `libnotify` package (for `notify-send`)
   * `xsel` package (for copying to clipboard)
 
-configuration to use ss with custom server
+
+using `ss`with a custom server
 ------------------------------------------
 
 `ss` sources `~/.ssrc`. This file must define two variables:
@@ -45,13 +49,25 @@ The endpoint must accept a POST request with the following variables:
 
 The response body must be the full URL of the stored image.
 
-Imgur.com
----------
 
-You need to add the --imgur flag.
+using `ss` with imgur
+-------------------
 
-using with...
--------------
+`ss` sources `~/.ssrc`. This file must define the API key variable:
+
+  * `imgur_api_key`: a valid imgur API key
+
+Here's an example:
+
+```
+imgur_api_key=b3625162d3418ac51a9ee805b1840452
+```
+
+When calling `ss`, use the `--imgur` option:
+
+
+window manager integration
+--------------------------
 
 ### Fluxbox
 
@@ -65,9 +81,13 @@ Replace `180` by the keycode or key combination of your choice.
 
 ### i3
 
-Add this to your ~/.i3/config
+Add this to your `~/.i3/config`:
+
 ```
 bindsym $mod+c exec sleep 0.2 && bash /path/to/ss
 ```
 
-It seems that the sleep is necessary in order to use `scrot` with rectangle selection from i3 key binding. Any fix is welcome.
+Replace `$mod+c` by the key combination of your choice.
+
+(It seems that sleeping is necessary here in order to use `scrot` with
+rectangle selection from an i3 key binding. Any fix is welcome.)

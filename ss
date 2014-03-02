@@ -6,34 +6,41 @@ source ~/.ssrc
 # temporary file
 tmp="$(mktemp -u --suffix=.png)"
 
-# argument flag to upload to imgur.com
-imgur_flag="--imgur"
-
-# set variables to call imgur script
-DIR="$(cd "$(dirname "$0")" && pwd )"
-imgur_upload_path=$DIR"/imgurbash.sh"
+# get imgur upload function
+DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$DIR/imgurbash.sh"
 
 # grab rectangle (remove -r option if using the upstream scrot)
 scrot -sr "$tmp"
 
 if [ $? -eq 0 ]; then
+    failed=0
+
 	# check for imgur flag
-	if [ $# -gt 0 ] && [ $1 = $imgur_flag ];
-	then
-		# upload screenshot to Imgur.com
-		link="$("$imgur_upload_path" "$tmp")"
+	if [ $# -gt 0 ] && [ $1 = "--imgur" ]; then
+		# upload screenshot to imgur
+        link="$(upload2imgur "$imgur_api_key" "$tmp")"
+        if [ ! $? -eq 0 ]; then
+            failed=1
+        fi
 	else
 		# upload screenshot to custom server
 		link="$(curl -F "passwd=$password" -F "img=@$tmp" "$url")"
+        if [ ! $? -eq 0 ]; then
+            failed=1
+        fi
 	fi
 
-	# copy to clipboard
-	echo -n "$link" | xsel -b
-
-	# notify
+    # notify (may output error message too)
 	notify-send ss "$link"
+
+    # failed?
+    if [ $failed -eq 0 ]; then
+        # copy to clipboard only if successful
+        echo -n "$link" | xsel -b
+    fi
 else
-	# fail
+	# screenshot fail
 	notify-send ss "could not take screenshot"
 fi
 
