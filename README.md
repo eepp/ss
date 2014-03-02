@@ -1,4 +1,4 @@
-`ss` - easy screenshot sharing for X
+ss - easy screenshot sharing for X
 ==================================
 
 This simple script does the following when executed:
@@ -27,7 +27,7 @@ You need all the following:
   * `xsel` package (for copying to clipboard)
 
 
-using `ss`with a custom server
+using ss with a custom server
 ------------------------------------------
 
 `ss` sources `~/.ssrc`. This file must define two variables:
@@ -50,7 +50,7 @@ The endpoint must accept a POST request with the following variables:
 The response body must be the full URL of the stored image.
 
 
-using `ss` with imgur
+using ss with imgur
 -------------------
 
 `ss` sources `~/.ssrc`. This file must define the API key variable:
