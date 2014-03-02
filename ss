@@ -28,7 +28,7 @@ if [ $? -eq 0 ]; then
 	fi
 
 	# copy to clipboard
-	echo -n "$link" | xsel -ib
+	echo -n "$link" | xsel -b
 
 	# notify
 	notify-send ss "$link"
