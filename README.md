@@ -63,7 +63,7 @@ Here's an example:
 imgur_api_key=b3625162d3418ac51a9ee805b1840452
 ```
 
-When calling `ss`, use the `--imgur` option:
+When calling `ss`, use the `--imgur` option.
 
 
 window manager integration
