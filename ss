@@ -11,6 +11,7 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$DIR/imgurbash.sh"
 
 # grab rectangle (remove -r option if using the upstream scrot)
+sleep .1
 scrot -sr "$tmp"
 
 if [ $? -eq 0 ]; then
